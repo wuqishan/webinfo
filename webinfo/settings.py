@@ -98,6 +98,6 @@ ITEM_PIPELINES = {
 
 
 MYSQL_HOST = "127.0.0.1"
-MYSQL_DBNAME = "vagrant"
+MYSQL_DBNAME = "scrapy"
 MYSQL_USER = "root"
-MYSQL_PASSWORD = "wuqishan"
+MYSQL_PASSWORD = "wuqishan573"
