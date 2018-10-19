@@ -1,10 +1,12 @@
 import scrapy
 from scrapy.http import Request
-
+from webinfo.items import LexisItem
 
 class LexisSpider(scrapy.Spider):
     # 这个name是你必须给它一个唯一的名字  后面我们执行文件时的名字
     name = "lexis"
+
+    allowed_domains = ["hk.lexiscn.com"]
 
     # 这个列表中的url可以有多个，它会依次都执行，我们这里简单爬取一个
     start_urls = [
@@ -16,13 +18,15 @@ class LexisSpider(scrapy.Spider):
 
 
     def parse(self, response):  # 默认函数parse
-        
+
         docList = response.xpath('//ul[@class="list"]/li')
         if (len(docList) > 0):
             for li in docList:
-                title = li.xpath('./a/text()').extract()[0]
-                href = li.xpath('./a/@href').extract()[0]
-                print(title, href, end="\n")
+                item = LexisItem()
+                item['title'] = li.xpath('./a/text()').extract()[0]
+                item['href'] = li.xpath('./a/@href').extract()[0]
+
+                yield item
         # print("！！！！！返回信息是：")
         # info = sites.xpath('./li')
         # # 从sites中我们再进一步获取到所有电影的所有信息

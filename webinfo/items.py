@@ -7,8 +7,13 @@
 
 import scrapy
 
+class LexisItem(scrapy.Item):
+    title = scrapy.Field()
+    href = scrapy.Field()
 
-class WebinfoItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    def get_insert_sql(self):
+        insert_sql = "insert into scrapy_lexis(title,href) values (%s,%s,%s,%s,%s,%s)"
+        params = (
+            self['title'], self['href']
+        )
+        return insert_sql, params

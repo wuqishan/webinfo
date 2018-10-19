@@ -43,6 +43,10 @@ ROBOTSTXT_OBEY = True
 #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 #   'Accept-Language': 'en',
 #}
+DEFAULT_REQUEST_HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3423.2 Safari/537.36',
+    'Accept-Language': 'en-US,en;q=0.9'
+}
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
@@ -67,6 +71,9 @@ ROBOTSTXT_OBEY = True
 #ITEM_PIPELINES = {
 #    'webinfo.pipelines.WebinfoPipeline': 300,
 #}
+ITEM_PIPELINES = {
+    'webinfo.pipelines.LexisPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +95,9 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+
+MYSQL_HOST = "127.0.0.1"
+MYSQL_DBNAME = "vagrant"
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "wuqishan"
