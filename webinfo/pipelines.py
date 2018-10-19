@@ -11,7 +11,7 @@ import pymysql
 import pymysql.cursors
 
 
-class MysqlTwistedPipeline(object):
+class LexisPipeline(object):
     def __init__(self, dbpool):
         self.dbpool = dbpool
 

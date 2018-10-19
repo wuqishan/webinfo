@@ -1,7 +1,7 @@
 import scrapy
 from scrapy.http import Request
 # from webinfo.items import LexisItem
-from webinfo.webinfo.items import LexisItem
+from webinfo.items import LexisItem
 
 
 class LexisSpider(scrapy.Spider):
