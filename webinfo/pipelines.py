@@ -18,7 +18,7 @@ class LexisPipeline(object):
     @classmethod
     def from_settings(cls, settings):
         dbpool = adbapi.ConnectionPool("pymysql", host=settings["MYSQL_HOST"], db=settings["MYSQL_DBNAME"],
-                                       user=settings["MYSQL_USER"], password=settings["MYSQL_PASSWORD"], charset="utf8",
+                                       user=settings["MYSQL_USER"], password=settings["MYSQL_PASSWORD"], charset="utf8mb4",
                                        cursorclass=pymysql.cursors.DictCursor,
                                        use_unicode=True)
         return cls(dbpool)
