@@ -13,7 +13,7 @@ class LexisItem(scrapy.Item):
     href = scrapy.Field()
 
     def get_insert_sql(self):
-        insert_sql = "insert into lexis(title,href) values (%s,%s)"
+        insert_sql = "insert into lexis(title,href) values ('%s','%s')"
         params = (
             self['title'], self['href']
         )
