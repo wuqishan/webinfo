@@ -1,6 +1,8 @@
 import scrapy
 from scrapy.http import Request
-from webinfo.items import LexisItem
+# from webinfo.items import LexisItem
+from webinfo.webinfo.items import LexisItem
+
 
 class LexisSpider(scrapy.Spider):
     # 这个name是你必须给它一个唯一的名字  后面我们执行文件时的名字
@@ -15,7 +17,6 @@ class LexisSpider(scrapy.Spider):
 
     # 因为豆瓣250有翻页操作，我们设置这个url用来翻页
     # url = "https://movie.douban.com/top250"
-
 
     def parse(self, response):  # 默认函数parse
 

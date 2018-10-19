@@ -7,6 +7,7 @@
 
 import scrapy
 
+
 class LexisItem(scrapy.Item):
     title = scrapy.Field()
     href = scrapy.Field()
