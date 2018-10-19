@@ -18,3 +18,17 @@ class LexisItem(scrapy.Item):
             self['title'], self['href']
         )
         return insert_sql, params
+
+
+class MaoYanItem(scrapy.Item):
+    title = scrapy.Field()
+    href = scrapy.Field()
+    score = scrapy.Field()
+    imgSrc = scrapy.Field()
+
+    def get_insert_sql(self):
+        insert_sql = "insert into lexis(title, href, score, imgSrc) values (%s, %s, %s, %s)"
+        params = (
+            self['title'], self['href'], self['score'], self['imgSrc']
+        )
+        return insert_sql, params

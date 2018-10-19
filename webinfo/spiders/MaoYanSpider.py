@@ -1,10 +1,10 @@
 import scrapy
 from scrapy.http import Request
 # from webinfo.items import LexisItem
-from webinfo.items import LexisItem
+from webinfo.items import MaoYanItem
 
 
-class LexisSpider(scrapy.Spider):
+class MaoYanSpider(scrapy.Spider):
     # 这个name是你必须给它一个唯一的名字  后面我们执行文件时的名字
     name = "maoyan"
 
@@ -20,13 +20,13 @@ class LexisSpider(scrapy.Spider):
 
     def parse(self, response):  # 默认函数parse
 
-        docList = response.xpath('//ul[@class="list"]/li')
+        docList = response.xpath('//div[@class="movie-item"]')
         if (len(docList) > 0):
             for li in docList:
-                item = LexisItem()
+                item = MaoYanItem()
                 item['title'] = li.xpath('./a/text()').extract()[0]
                 item['href'] = li.xpath('./a/@href').extract()[0]
 
-                yield item
+                # yield item
 
 
