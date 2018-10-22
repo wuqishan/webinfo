@@ -13,16 +13,15 @@ import pymysql.cursors
 
 
 class LexisPipeline(object):
-    def __init__(self, dbpool, settings):
+    def __init__(self, dbpool):
         self.dbpool = dbpool
-        self.settings = settings
     @classmethod
     def from_settings(cls, settings):
         dbpool = adbapi.ConnectionPool("pymysql", host=settings["MYSQL_HOST"], db=settings["MYSQL_DBNAME"],
                                        user=settings["MYSQL_USER"], password=settings["MYSQL_PASSWORD"], charset="utf8mb4",
                                        cursorclass=pymysql.cursors.DictCursor,
                                        use_unicode=True)
-        return cls(dbpool, settings)
+        return cls(dbpool)
 
     def process_item(self, item, spider):
         # 使用twisted将mysql插入变成异步执行
@@ -32,7 +31,7 @@ class LexisPipeline(object):
 
         # mailer = MailSender()
         # mailer = MailSender.from_settings(self.settings)
-        print(self.settings)
+        print(spider.settings)
         # mailer.send(to=["1174955828@qq.com"], subject="Some subject", body="Some body", cc=[])
 
     def do_insert(self, cursor, item):
