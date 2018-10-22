@@ -24,7 +24,7 @@ class MaoYanSpider(scrapy.Spider):
 
     def parse(self, response):  # 默认函数parse
 
-        doc_list = response.xpath('//dl[@class="movie-list"]/dd')
+        doc_list = response.xpath('//dl[@class="movie-list"]//dd')
         if (len(doc_list) > 0):
             for doc in doc_list:
                 # item = MaoYanItem()
