@@ -31,9 +31,9 @@ class LexisPipeline(object):
     def close_spider(self, spider):
 
         # mailer = MailSender()
-        mailer = MailSender.from_settings(self.settings)
+        # mailer = MailSender.from_settings(self.settings)
         print(self.settings)
-        mailer.send(to=["1174955828@qq.com"], subject="Some subject", body="Some body", cc=[])
+        # mailer.send(to=["1174955828@qq.com"], subject="Some subject", body="Some body", cc=[])
 
     def do_insert(self, cursor, item):
         # 执行具体的插入
