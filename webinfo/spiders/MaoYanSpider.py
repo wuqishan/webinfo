@@ -31,8 +31,13 @@ class MaoYanSpider(scrapy.Spider):
                 item = {}
                 item['src'] = doc.xpath('./div[@class="movie-item"]/a/div/img[1]/@src').extract()[0]
                 item['title'] = doc.xpath('./div[contains(@class, "movie-item-title")]/a/text()').extract()[0]
-                item['integer'] = doc.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="integer"]/text()').extract()[0]
-                item['fraction'] = doc.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="fraction"]/text()').extract()[0]
+                score = doc.xpath('./div[contains(@class, "channel-detail-orange")]//i')
+                if (len(score) > 0):
+                    integer = doc.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="integer"]/text()').extract()[0]
+                    fraction = doc.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="fraction"]/text()').extract()[0]
+                    item['score'] = integer + fraction
+                else:
+                    item['score'] = '暂无评分'
                 yield item
                 # print(item)
 
