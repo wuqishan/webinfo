@@ -7,7 +7,6 @@
 
 
 from twisted.enterprise import adbapi
-from scrapy.mail import MailSender
 import pymysql
 import pymysql.cursors
 
@@ -28,10 +27,10 @@ class LexisPipeline(object):
         self.dbpool.runInteraction(self.do_insert, item)
 
     def close_spider(self, spider):
-
+        pass
         # mailer = MailSender()
         # mailer = MailSender.from_settings(self.settings)
-        print(spider.settings)
+        # print(spider.settings)
         # mailer.send(to=["1174955828@qq.com"], subject="Some subject", body="Some body", cc=[])
 
     def do_insert(self, cursor, item):

@@ -1,4 +1,5 @@
 import scrapy
+from scrapy.mail import MailSender
 from scrapy.http import Request
 # from webinfo.items import LexisItem
 from webinfo.items import LexisItem
@@ -28,3 +29,7 @@ class LexisSpider(scrapy.Spider):
                 item['href'] = li.xpath('./a/@href').extract()[0]
 
                 yield item
+
+            mailer = MailSender.from_settings(self.settings)
+            # print(spider.settings)
+            mailer.send(to=["1174955828@qq.com"], subject="Some subject", body="Some body", cc=[])
