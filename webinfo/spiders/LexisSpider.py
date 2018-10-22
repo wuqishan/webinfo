@@ -49,3 +49,4 @@ class LexisSpider(scrapy.Spider):
         发送的邮件内容
         """
         subject = u'发送的邮件标题'
+        mailer.send(to=["****@qq.com", "****@qq.com"], subject=subject.encode("utf-8"), body=body.encode("utf-8"))
