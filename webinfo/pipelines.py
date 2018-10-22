@@ -32,3 +32,12 @@ class LexisPipeline(object):
         # 根据不同的item 构建不同的sql语句并插入到mysql中
         insert_sql, params = item.get_insert_sql()
         cursor.execute(insert_sql, params)
+
+class EmptyPipeline(object):
+
+    def __init__(self):
+        pass
+
+    def process_item(self, item, spider):
+
+        return item

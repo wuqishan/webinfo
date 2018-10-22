@@ -15,18 +15,25 @@ class MaoYanSpider(scrapy.Spider):
         "http://maoyan.com/films"
     ]
 
+    custom_settings = {
+        'ITEM_PIPELINES': {'webinfo.pipelines.EmptyPipeline': 300, }
+    }
+
     # 因为豆瓣250有翻页操作，我们设置这个url用来翻页
     # url = "https://movie.douban.com/top250"
 
     def parse(self, response):  # 默认函数parse
 
-        docList = response.xpath('//div[@class="movie-item"]')
+        docList = response.xpath('//dl[@class="movie-list"]/dd')
         if (len(docList) > 0):
             for li in docList:
-                item = MaoYanItem()
-                item['title'] = li.xpath('./a/text()').extract()[0]
-                item['href'] = li.xpath('./a/@href').extract()[0]
-
+                # item = MaoYanItem()
+                item = {}
+                item['src'] = li.xpath('./div[@class="movie-item"]/a/div/img[2]/@src').extract()[0]
+                item['title'] = li.xpath('./div[contains(@class, "movie-item-title")]/a/text()').extract()[0]
+                item['integer'] = li.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="integer"]/text()').extract()[0]
+                item['fraction'] = li.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="fraction"]/text()').extract()[0]
+                print(item)
                 # yield item
 
 
