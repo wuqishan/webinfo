@@ -20,13 +20,11 @@ class LexisSpider(scrapy.Spider):
 
     def parse(self, response):  # 默认函数parse
 
-        docList = response.xpath('//ul[@class="list"]/li')
-        if (len(docList) > 0):
-            for li in docList:
+        doc_list = response.xpath('//ul[@class="list"]/li')
+        if (len(doc_list) > 0):
+            for li in doc_list:
                 item = LexisItem()
                 item['title'] = li.xpath('./a/text()').extract()[0]
                 item['href'] = li.xpath('./a/@href').extract()[0]
 
                 yield item
-
-

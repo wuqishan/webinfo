@@ -24,16 +24,16 @@ class MaoYanSpider(scrapy.Spider):
 
     def parse(self, response):  # 默认函数parse
 
-        docList = response.xpath('//dl[@class="movie-list"]/dd')
-        if (len(docList) > 0):
-            for li in docList:
+        doc_list = response.xpath('//dl[@class="movie-list"]/dd')
+        if (len(doc_list) > 0):
+            for doc in doc_list:
                 # item = MaoYanItem()
                 item = {}
-                item['src'] = li.xpath('./div[@class="movie-item"]/a/div/img[1]/@src').extract()[0]
-                item['title'] = li.xpath('./div[contains(@class, "movie-item-title")]/a/text()').extract()[0]
-                item['integer'] = li.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="integer"]/text()').extract()[0]
-                item['fraction'] = li.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="fraction"]/text()').extract()[0]
+                item['src'] = doc.xpath('./div[@class="movie-item"]/a/div/img[1]/@src').extract()[0]
+                item['title'] = doc.xpath('./div[contains(@class, "movie-item-title")]/a/text()').extract()[0]
+                item['integer'] = doc.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="integer"]/text()').extract()[0]
+                item['fraction'] = doc.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="fraction"]/text()').extract()[0]
                 print(item)
-                # yield item
+                yield item
 
 
