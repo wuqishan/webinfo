@@ -105,3 +105,12 @@ MYSQL_HOST = "127.0.0.1"
 MYSQL_DBNAME = "scrapy"
 MYSQL_USER = "root"
 MYSQL_PASSWORD = "wuqishan573"
+
+# mail setting
+MAIL_FROM = 'scrapy@localhost'
+MAIL_HOST = 'smtp.163.com'
+MAIL_PORT = 465
+MAIL_USER = '13262693729@163.com'
+MAIL_PASS = 'wuqishan163'
+MAIL_TLS = False
+MAIL_SSL = False

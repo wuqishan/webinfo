@@ -7,25 +7,32 @@
 
 
 from twisted.enterprise import adbapi
+from scrapy.mail import MailSender
 import pymysql
 import pymysql.cursors
 
 
 class LexisPipeline(object):
-    def __init__(self, dbpool):
+    def __init__(self, dbpool, settings):
         self.dbpool = dbpool
-
+        self.settings = settings
     @classmethod
     def from_settings(cls, settings):
         dbpool = adbapi.ConnectionPool("pymysql", host=settings["MYSQL_HOST"], db=settings["MYSQL_DBNAME"],
                                        user=settings["MYSQL_USER"], password=settings["MYSQL_PASSWORD"], charset="utf8mb4",
                                        cursorclass=pymysql.cursors.DictCursor,
                                        use_unicode=True)
-        return cls(dbpool)
+        return cls(dbpool, settings)
 
     def process_item(self, item, spider):
         # 使用twisted将mysql插入变成异步执行
         self.dbpool.runInteraction(self.do_insert, item)
+
+    def close_spider(self, spider):
+
+        # mailer = MailSender()
+        mailer = MailSender.from_settings(self.settings)
+        mailer.send(to=["1174955828@qq.com"], subject="Some subject", body="Some body", cc=[])
 
     def do_insert(self, cursor, item):
         # 执行具体的插入
