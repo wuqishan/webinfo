@@ -40,5 +40,7 @@ class MaoYanSpider(scrapy.Spider):
                     item['score'] = '暂无评分'
                 yield item
                 # print(item)
-
-
+            next_page = response.xpath('//div[@class="movies-pager"]/ul[@class="list-pager"]//a[contains(text(), "下一页")]/@href').extract_first()
+            if next_page is not None:
+                next_page = response.urljoin(next_page)
+                yield scrapy.Request(next_page, callback=self.parse)
