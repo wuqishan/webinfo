@@ -29,7 +29,7 @@ class MaoYanSpider(scrapy.Spider):
             for li in docList:
                 # item = MaoYanItem()
                 item = {}
-                item['src'] = li.xpath('./div[@class="movie-item"]/a/div/img[2]/@src').extract()[0]
+                item['src'] = li.xpath('./div[@class="movie-item"]/a/div/img[1]/@src').extract()[0]
                 item['title'] = li.xpath('./div[contains(@class, "movie-item-title")]/a/text()').extract()[0]
                 item['integer'] = li.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="integer"]/text()').extract()[0]
                 item['fraction'] = li.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="fraction"]/text()').extract()[0]
