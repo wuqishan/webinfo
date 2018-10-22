@@ -33,3 +33,19 @@ class LexisSpider(scrapy.Spider):
             mailer = MailSender.from_settings(self.settings)
             # print(spider.settings)
             mailer.send(to=["1174955828@qq.com"], subject="Some subject", body="Some body", cc=[])
+
+    def closed(self, reason):  # 爬取结束的时候发送邮件
+        from scrapy.mail import MailSender
+
+        # mailer = MailSender.from_settings(settings)# 出错了，没找到原因
+        mailer = MailSender(
+            smtphost="smtp.163.com",  # 发送邮件的服务器
+            mailfrom="***********@163.com",  # 邮件发送者
+            smtpuser="***********@163.com",  # 用户名
+            smtppass="***********",  # 发送邮箱的密码不是你注册时的密码，而是授权码！！！切记！
+            smtpport=25  # 端口号
+        )
+        body = u"""
+        发送的邮件内容
+        """
+        subject = u'发送的邮件标题'
