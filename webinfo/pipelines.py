@@ -32,6 +32,7 @@ class LexisPipeline(object):
 
         # mailer = MailSender()
         mailer = MailSender.from_settings(self.settings)
+        print(self.settings)
         mailer.send(to=["1174955828@qq.com"], subject="Some subject", body="Some body", cc=[])
 
     def do_insert(self, cursor, item):
