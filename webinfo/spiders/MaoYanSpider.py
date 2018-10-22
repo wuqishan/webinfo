@@ -33,7 +33,7 @@ class MaoYanSpider(scrapy.Spider):
                 item['title'] = doc.xpath('./div[contains(@class, "movie-item-title")]/a/text()').extract()[0]
                 item['integer'] = doc.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="integer"]/text()').extract()[0]
                 item['fraction'] = doc.xpath('./div[contains(@class, "channel-detail-orange")]/i[@class="fraction"]/text()').extract()[0]
-                print(item)
                 yield item
+                # print(item)
 
 
