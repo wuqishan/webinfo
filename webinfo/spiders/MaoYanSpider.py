@@ -19,9 +19,6 @@ class MaoYanSpider(scrapy.Spider):
         'ITEM_PIPELINES': {'webinfo.pipelines.EmptyPipeline': 300, }
     }
 
-    # 因为豆瓣250有翻页操作，我们设置这个url用来翻页
-    # url = "https://movie.douban.com/top250"
-
     def parse(self, response):  # 默认函数parse
 
         doc_list = response.xpath('//dl[@class="movie-list"]//dd')
